@@ -1,9 +1,9 @@
-export const ASSET_PURCHASE = "AssetPurchase";
-export const ASSET_SALE = "AssetSale";
-export const PRINCIPAL_DRAW = "PrincipalDraw";
-export const PRINCIPAL_RETURN = "PrincipalReturn";
-export const INTEREST_PAYMENT = "InterestPayment";
-export const FEES_PAYMENT = "FeesPayment";
+export const ASSET_PURCHASE = "AssetPurchase" as const;
+export const ASSET_SALE = "AssetSale" as const;
+export const PRINCIPAL_DRAW = "PrincipalDraw" as const;
+export const PRINCIPAL_RETURN = "PrincipalReturn" as const;
+export const INTEREST_PAYMENT = "InterestPayment" as const;
+export const FEES_PAYMENT = "FeesPayment" as const;
 
 export const principalGroupTransactions = [
   PRINCIPAL_DRAW,
