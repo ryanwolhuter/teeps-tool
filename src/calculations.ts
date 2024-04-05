@@ -108,10 +108,13 @@ export function calculatePurchaseProceeds(transactions: GroupTransaction[]) {
   );
   const sumCashBalanceChange = sumBaseTransactionAmounts(
     purchaseTransactions,
-    "cashTransaction"
+    "cashTransaction",
+    1
   );
 
-  return sumCashBalanceChange;
+  const sumFees = sumGroupTransactionFees(purchaseTransactions);
+
+  return sumCashBalanceChange + sumFees;
 }
 
 /**
@@ -129,7 +132,9 @@ export function calculateSalesProceeds(transactions: GroupTransaction[]) {
     "cashTransaction"
   );
 
-  return sumCashBalanceChange;
+  const sumFees = sumGroupTransactionFees(saleTransactions);
+
+  return sumCashBalanceChange - sumFees;
 }
 
 /**
@@ -197,14 +202,17 @@ export function sumGroupTransactionFees(transactions: GroupTransaction[]) {
  */
 export function sumBaseTransactionAmounts(
   transactions: GroupTransaction[],
-  cashOrFixedIncomeTransaction: "cashTransaction" | "fixedIncomeTransaction"
+  cashOrFixedIncomeTransaction: "cashTransaction" | "fixedIncomeTransaction",
+  signOverride?: 1 | -1
 ) {
   return transactions.reduce((sum, transaction) => {
     const baseTransaction = transaction[cashOrFixedIncomeTransaction];
     if (!baseTransaction) return sum;
     const { type } = transaction;
     const { amount } = baseTransaction;
-    const sign = getTransactionAmountSign(type, cashOrFixedIncomeTransaction);
+    const sign =
+      signOverride ??
+      getTransactionAmountSign(type, cashOrFixedIncomeTransaction);
     return sum + sign * amount;
   }, 0);
 }
