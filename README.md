@@ -1,4 +1,6 @@
-# teeps-tool
+# Teep's Tool
+
+This repo uses [bun](https://bun.sh) to run the TypeScript code. See the link for installation instructions.
 
 To install dependencies:
 
@@ -11,5 +13,3 @@ To run:
 ```bash
 bun run index.ts
 ```
-
-This project was created using `bun init` in bun v1.1.0. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
